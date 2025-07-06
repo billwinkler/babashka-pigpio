@@ -87,3 +87,8 @@
   "Writes a level to a GPIO pin."
   [gpio level]
   (pigpio-command :write gpio level))
+
+(defn set-servo-pulse
+  "Sets the servo pulse width. A pulse width of 0 turns the servo off."
+  [gpio pulse-width]
+  (pigpio-command :servo gpio pulse-width))

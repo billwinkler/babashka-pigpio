@@ -64,6 +64,14 @@
                  :validate {:pred #(or (= 0 %) (= 1 %))
                             :ex-msg (fn [{:keys [val]}] (format "Level must be 0 or 1, got: '%s'" val))}}))
 
+(def servo-spec
+  (assoc pin-spec
+         :pulse {:coerce :int
+                 :require true
+                 :desc "The pulse width in microseconds (0, 500-2500)."
+                 :validate {:pred #(or (= 0 %) (and (>= % 500) (<= % 2500)))
+                            :ex-msg (fn [{:keys [val]}] (format "Pulse width must be 0 or between 500 and 2500, got: '%s'" val))}}))
+
 (defn set-mode
   "Sets a GPIO pin to input or output mode."
   {:org.babashka/cli {:spec mode-spec
@@ -119,3 +127,14 @@
     (println (cli/format-opts {:spec pin-spec}))
     (when pin
       (println (gpio/get-mode pin)))))
+
+(defn servo
+  "Sets the servo pulse width."
+  {:org.babashka/cli {:spec servo-spec
+                      :args->opts [:pin :pulse]
+                      :error-fn error-fn}}
+  [{:keys [pin pulse help]}]
+  (if help
+    (println (cli/format-opts {:spec servo-spec}))
+    (when (and pin pulse)
+      (println (gpio/set-servo-pulse pin pulse)))))
