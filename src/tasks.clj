@@ -18,8 +18,7 @@
 
     :else (do (println "dunno, this wasn't expected")
               (throw (ex-info msg data))))
-  ;;(System/exit 1)
-  )
+  (System/exit 1))
 
 (def example-spec {:help {:alias :h :desc "Help for this task"}
                    :num {:alias :n :coerce [:int] :desc "Coerces -n values into a vec of ints"}
@@ -61,20 +60,26 @@
 (defn set-output
   "Sets a GPIO pin to output mode."
   {:org.babashka/cli {:spec pin-spec
-                      :args->opts [:pin]}}
+                      :args->opts [:pin]
+                      :error-fn error-fn}}
   [{:keys [pin]}]
-  (println (gpio/set-mode pin :output)))
+  (when pin
+    (println (gpio/set-mode pin :output))))
 
 (defn write-pin
   "Writes a level (0 or 1) to a GPIO pin."
   {:org.babashka/cli {:spec write-spec
-                      :args->opts [:pin :level]}}
+                      :args->opts [:pin :level]
+                      :error-fn error-fn}}
   [{:keys [pin level]}]
-  (println (gpio/write-pin pin level)))
+  (when (and pin level)
+    (println (gpio/write-pin pin level))))
 
 (defn read-pin
   "Reads the level of a GPIO pin."
   {:org.babashka/cli {:spec pin-spec
-                      :args->opts [:pin]}}
+                      :args->opts [:pin]
+                      :error-fn error-fn}}
   [{:keys [pin]}]
-  (println (gpio/read-pin pin)))
+  (when pin
+    (println (gpio/read-pin pin))))
