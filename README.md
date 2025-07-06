@@ -2,6 +2,10 @@
 
 A command-line interface for controlling Raspberry Pi GPIO pins using `babashka` and the `pigpio` library. This tool communicates with the `pigpiod` daemon to perform GPIO operations.
 
+## Work in Progress
+
+This project is currently a work-in-progress. The API and functionality are subject to change.
+
 ## Prerequisites
 
 Before using this tool, ensure you have the following installed and running:
@@ -50,6 +54,15 @@ Here are some of the available tasks and how to use them:
 *   **`get-mode <pin>`**: Gets the current mode of a GPIO pin.
     ```bash
     bb get-mode 17
+    ```
+
+*   **`servo <pin> <pulse>`**: Sets the servo pulse width in microseconds (0 to turn off, 500-2500 for positioning).
+    ```bash
+    # Set servo on pin 17 to mid-point
+    bb servo 17 1500
+
+    # Turn off servo on pin 17
+    bb servo 17 0
     ```
 
 ## Development
