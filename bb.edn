@@ -1,17 +1,16 @@
 {:paths ["src"]
- :tasks {:requires ([pigpio :as gpio])
+ :tasks {example
+         {:doc "an example of how to refactor these functions"
+          :task (exec 'tasks/example-task)}
          get-hardware-version
-          {:doc "Gets the hardware version of the Raspberry Pi."
-           :task (do (println (gpio/pigpio-command :hwver 0 0)))}
-          set-output
-          {:doc "Sets a GPIO pin to output."
-           :task (do (println (gpio/set-mode 17 :output)))}
-          write-high
-          {:doc "Writes a high value to a GPIO pin."
-           :task (do (println (gpio/write-pin 17 1)))}
-          read-pin
-          {:doc "Reads the level of a GPIO pin."
-           :task (do (println (gpio/read-pin 17)))}
-          write-low
-          {:doc "Writes a low value to a GPIO pin."
-           :task (do (println (gpio/write-pin 17 0)))}}}
+         {:doc "Gets the hardware version of the Raspberry Pi."
+          :task (exec 'tasks/get-hardware-version)}
+         set-output
+         {:doc "Sets a GPIO pin to output."
+          :task (exec 'tasks/set-output)}
+         write-pin
+         {:doc "Writes a high or low value to a GPIO pin."
+          :task (exec 'tasks/write-pin)}
+         read-pin
+         {:doc "Reads the level of a GPIO pin."
+          :task (exec 'tasks/read-pin)}}}
