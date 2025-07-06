@@ -28,9 +28,9 @@ Here are some of the available tasks and how to use them:
     bb get-hardware-version
     ```
 
-*   **`set-output <pin>`**: Sets a specific GPIO pin to output mode.
+*   **`set-mode <pin> <mode>`**: Sets a specific GPIO pin to input or output mode.
     ```bash
-    bb set-output 17
+    bb set-mode 17 output
     ```
 
 *   **`write-pin <pin> <level>`**: Writes a high (1) or low (0) value to a GPIO pin.
@@ -45,6 +45,11 @@ Here are some of the available tasks and how to use them:
 *   **`read-pin <pin>`**: Reads the current level of a GPIO pin.
     ```bash
     bb read-pin 17
+    ```
+
+*   **`get-mode <pin>`**: Gets the current mode of a GPIO pin.
+    ```bash
+    bb get-mode 17
     ```
 
 ## Development

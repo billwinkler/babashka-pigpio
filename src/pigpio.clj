@@ -72,6 +72,12 @@
   [gpio mode]
   (pigpio-command :modes gpio (get modes mode)))
 
+(defn get-mode
+  "Gets the mode of a GPIO pin."
+  [gpio]
+  (let [mode-val (:res (pigpio-command :modeg gpio 0))]
+    (first (first (filter (fn [[k v]] (= v mode-val)) modes)))))
+
 (defn read-pin
   "Reads the level of a GPIO pin."
   [gpio]

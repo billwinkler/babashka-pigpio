@@ -5,12 +5,15 @@
          get-hardware-version
          {:doc "Gets the hardware version of the Raspberry Pi."
           :task (exec 'tasks/get-hardware-version)}
-         set-output
-         {:doc "Sets a GPIO pin to output."
-          :task (exec 'tasks/set-output)}
+         set-mode
+         {:doc "Sets a GPIO pin to input or output."
+          :task (exec 'tasks/set-mode)}
          write-pin
          {:doc "Writes a high or low value to a GPIO pin."
           :task (exec 'tasks/write-pin)}
          read-pin
          {:doc "Reads the level of a GPIO pin."
-          :task (exec 'tasks/read-pin)}}}
+          :task (exec 'tasks/read-pin)}
+         get-mode
+         {:doc "Gets the mode of a GPIO pin."
+          :task (exec 'tasks/get-mode)}}}
