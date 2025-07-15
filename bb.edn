@@ -16,4 +16,7 @@
           :task (exec 'tasks/read-pin)}
          get-mode
          {:doc "Gets the mode of a GPIO pin."
-          :task (exec 'tasks/get-mode)}}}
+          :task (exec 'tasks/get-mode)}
+         servo
+         {:doc "Sets the servo pulse width."
+          :task (exec 'tasks/servo)}}}
